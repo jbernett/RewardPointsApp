@@ -1,0 +1,13 @@
+﻿@{
+
+    ViewData["Title"] = "Home Page";
+}
+@model List<RewardPointsApp.ViewModel.CustomerViewModel> 
+
+<div class="text-center">
+
+    @foreach (var customer in Model)
+    {
+        <partial name="DisplayCustomer.cshtml" model='customer'/>
+    }
+</div>

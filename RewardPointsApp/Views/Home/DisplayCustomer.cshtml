@@ -1,0 +1,43 @@
+﻿@model RewardPointsApp.ViewModel.CustomerViewModel;
+
+
+@using (Html.BeginForm("CalculatedRewards", "Home", FormMethod.Post))
+{
+
+    <h3>Customer : @Model.Guid</h3>
+    @if (Model.Rewards <= 0)
+    {
+        <button class="btn btn-primary" type="submit">Calculate</button>
+    }
+    else
+    {
+        <h4>Rewards: @Model.Rewards</h4>
+    }
+
+    <input hidden asp-for="@Model.Guid" />
+
+    <hr />
+    if (Model.Invoices != null && Model.Invoices.Count() > 0)
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Guid</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var invoice in Model.Invoices)
+                {
+                    <tr>
+                        <td>@invoice.Guid</td>
+                        <td>$@invoice.Total.ToString("n2")</td>
+                        <td>@invoice.Date.ToLocalTime()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+}
